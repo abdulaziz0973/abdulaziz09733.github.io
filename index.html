@@ -4,42 +4,82 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Abdulaziz Ibragimov</title>
-  <meta name="description" content="Abdulaziz Ibragimov - Personal Website" />
-  <meta name="keywords" content="Abdulaziz Ibragimov, portfolio, contact">
-  <meta name="author" content="Abdulaziz Ibragimov">
   <style>
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+      font-family: Arial, sans-serif;
+      background: url('https://images.unsplash.com/photo-1602407294553-6ac9170b5fe3?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
       background-size: cover;
       color: white;
       text-align: center;
+      position: relative;
+      overflow-x: hidden;
+      overflow-y: auto;
+      animation: fadeIn 2s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     h1 {
-      margin-top: 40px;
-      font-size: 3rem;
-      text-shadow: 0 0 10px black;
+      margin-top: 60px;
+      font-size: 4rem;
+      text-shadow: 0 0 10px #000;
+      animation: slideDown 1.2s ease;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .about, .portfolio, .extra {
+      background-color: rgba(0, 0, 0, 0.6);
+      margin: 40px auto;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 700px;
+      font-size: 1.3rem;
+      animation: fadeIn 1.5s ease-in;
+      position: relative;
+      z-index: 1;
+    }
+
+    .about img {
+      width: 350px;
+      border-radius: 10px;
+      margin-top: 20px;
+      box-shadow: 0 0 20px #000;
     }
 
     .contact {
       background: rgba(0, 0, 0, 0.6);
-      padding: 20px;
+      padding: 30px;
       border-radius: 10px;
-      max-width: 400px;
+      max-width: 500px;
       margin: auto;
-      margin-bottom: 40px;
+      margin-bottom: 60px;
+      font-size: 1.2rem;
+      animation: fadeInUp 1.5s ease-in;
+      position: relative;
+      z-index: 1;
+    }
+
+    @keyframes fadeInUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
     .contact input, .contact textarea, .contact button {
       width: 100%;
-      padding: 10px;
-      margin: 10px 0;
+      padding: 15px;
+      margin: 12px 0;
       border: none;
       border-radius: 5px;
-      font-size: 1rem;
+      font-size: 1.1rem;
     }
 
     .contact input, .contact textarea {
@@ -47,35 +87,94 @@
     }
 
     .contact button {
-      background: #00aaff;
+      background-color: #00aaff;
       color: white;
       cursor: pointer;
-      transition: 0.3s;
+      transition: background-color 0.3s ease;
     }
 
     .contact button:hover {
-      background: #007799;
+      background-color: #007799;
+    }
+
+    .dark {
+      background: #111 !important;
+      color: #eee !important;
+    }
+
+    .rain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .drop {
+      position: absolute;
+      width: 2px;
+      height: 20px;
+      background: rgba(255,255,255,0.4);
+      animation: fall 1s linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+
+    .footer {
+      padding: 20px;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: #ccc;
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
   <h1>Welcome to Abdulaziz Ibragimov's Website</h1>
-  <div class="about">
-  <h2>Men haqimda</h2>
-  <img src="https://raw.githubusercontent.com/abdulaziz0973/abdulaziz097.github.io/refs/heads/main/photo_2025-07-28_15-43-52.jpg" alt="Bu men" width="300" style="border-radius: 10px;">
-  <p>Men Abdulaziz. Web texnologiyalarga qiziqaman.</p>
-</div>
 
+  <button onclick="document.body.classList.toggle('dark')">🌙 Rejim</button>
+
+  <div class="about">
+    <h2>Men Haqimda</h2>
+    <img src="https://raw.githubusercontent.com/abdulaziz0973/abdulaziz097.github.io/refs/heads/main/photo_2025-07-28_15-43-52.jpg" alt="Abdulaziz rasmi">
+    <p>Men Abdulaziz Ibragimov. Web texnologiyalar, dizayn va zamonaviy interaktiv sahifalar yaratishga qiziqaman.</p>
+  </div>
+
+  <div class="portfolio">
+    <h2>Mening Ishlarim</h2>
+    <ul style="list-style: none; padding: 0;">
+      <li>✔️ Telegram bot yaratdim</li>
+      <li>✔️ GitHub sahifam: <a href="https://github.com/abdulaziz0973" target="_blank">Ko‘rish</a></li>
+    </ul>
+  </div>
+
+  <div class="extra">
+    <h2>Qiziqarli Fakt</h2>
+    <p>JavaScript va CSS yordamida har qanday saytga professional effektlar qo‘shish mumkin!</p>
+  </div>
 
   <div class="contact">
     <h2>Contact Me</h2>
     <form id="contactForm">
-      <input type="text" id="name" placeholder="Your Name" required>
-      <input type="email" id="email" placeholder="Your Email" required>
-      <input type="text" id="phone" placeholder="Your Phone" required>
-      <textarea id="message" placeholder="Your Message" rows="4" required></textarea>
+      <input type="text" id="name" placeholder="Your Name" required />
+      <input type="email" id="email" placeholder="Your Email" required />
+      <input type="text" id="phone" placeholder="Your Phone" required />
+      <textarea id="message" rows="4" placeholder="Your Message" required></textarea>
       <button type="submit">Send SMS</button>
     </form>
+  </div>
+
+  <div class="rain" id="rain"></div>
+
+  <div class="footer">
+    &copy; 2025 Abdulaziz Ibragimov. Barcha huquqlar himoyalangan.
   </div>
 
   <script>
@@ -96,9 +195,8 @@
         const res = await fetch(API, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ chat_id: CHAT_ID, text: text })
+          body: JSON.stringify({ chat_id: CHAT_ID, text })
         });
-
         const data = await res.json();
         if (data.ok) {
           alert("Xabar yuborildi! ✅");
@@ -110,6 +208,18 @@
         alert("Tarmoqqa ulanishda xatolik! ❌");
       }
     });
+
+    // Rain animation
+    const rain = document.getElementById("rain");
+    for (let i = 0; i < 100; i++) {
+      const drop = document.createElement("div");
+      drop.className = "drop";
+      drop.style.left = Math.random() * 100 + "vw";
+      drop.style.animationDuration = (0.5 + Math.random() * 1.5) + "s";
+      drop.style.opacity = Math.random();
+      drop.style.height = Math.random() * 20 + 10 + "px";
+      rain.appendChild(drop);
+    }
   </script>
 </body>
 </html>

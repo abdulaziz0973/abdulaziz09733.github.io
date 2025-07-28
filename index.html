@@ -1,40 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Abdulaziz Ibragimov - Personal Website" />
-  <meta name="keywords" content="Abdulaziz Ibragimov, personal website, contact, portfolio">
-  <meta name="author" content="Abdulaziz Ibragimov">
   <title>Abdulaziz Ibragimov</title>
+  <meta name="description" content="Abdulaziz Ibragimov - Personal Website" />
+  <meta name="keywords" content="Abdulaziz Ibragimov, portfolio, contact">
+  <meta name="author" content="Abdulaziz Ibragimov">
   <style>
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
       background-size: cover;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
+      color: white;
+      text-align: center;
     }
 
     h1 {
-      margin-top: 30px;
+      margin-top: 40px;
       font-size: 3rem;
-      color: #ffffffee;
-      text-shadow: 0 0 10px #000;
+      text-shadow: 0 0 10px black;
     }
 
     .car-gallery {
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
+      flex-wrap: wrap;
       gap: 20px;
-      margin: 30px 0;
+      margin: 40px 0;
     }
 
     .car-gallery img {
@@ -42,50 +37,43 @@
       height: 200px;
       object-fit: cover;
       border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 0 10px #000;
     }
 
     .contact {
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 30px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px;
       border-radius: 10px;
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-      margin-bottom: 40px;
-      width: 90%;
       max-width: 400px;
-    }
-
-    .contact h2 {
-      margin-bottom: 20px;
-      text-align: center;
+      margin: auto;
+      margin-bottom: 40px;
     }
 
     .contact input, .contact textarea, .contact button {
       width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
+      padding: 10px;
+      margin: 10px 0;
       border: none;
       border-radius: 5px;
       font-size: 1rem;
     }
 
     .contact input, .contact textarea {
-      background-color: #ffffffcc;
+      background: #ffffffcc;
     }
 
     .contact button {
-      background-color: #00c6ff;
+      background: #00aaff;
       color: white;
       cursor: pointer;
       transition: 0.3s;
     }
 
     .contact button:hover {
-      background-color: #007299;
+      background: #007799;
     }
   </style>
 </head>
-
 <body>
   <h1>Welcome to Abdulaziz Ibragimov's Website</h1>
 
@@ -97,10 +85,10 @@
   <div class="contact">
     <h2>Contact Me</h2>
     <form id="contactForm">
-      <input type="text" id="name" placeholder="Your Name" required />
-      <input type="email" id="email" placeholder="Your Email" required />
-      <input type="text" id="phone" placeholder="Your Phone" required />
-      <textarea id="message" rows="4" placeholder="Your Message" required></textarea>
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="email" id="email" placeholder="Your Email" required>
+      <input type="text" id="phone" placeholder="Your Phone" required>
+      <textarea id="message" placeholder="Your Message" rows="4" required></textarea>
       <button type="submit">Send SMS</button>
     </form>
   </div>
@@ -108,9 +96,9 @@
   <script>
     const TOKEN = "8475323214:AAGzFnvzciMf0U3facDDuQWfdMJKEkz4SZM";
     const CHAT_ID = "7405586478";
-    const URL_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+    const API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
 
-    document.getElementById("contactForm").addEventListener("submit", function (e) {
+    document.getElementById("contactForm").addEventListener("submit", async function (e) {
       e.preventDefault();
       const name = document.getElementById("name").value;
       const email = document.getElementById("email").value;
@@ -119,21 +107,24 @@
 
       const text = `📬 Yangi habar\n👤 Ism: ${name}\n📧 Email: ${email}\n📱 Tel: ${phone}\n📝 Xabar: ${message}`;
 
-      fetch(URL_API, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          chat_id: CHAT_ID,
-          text: text
-        })
-      })
-        .then(res => res.json())
-        .then(data => {
-          if (data.ok) {
-            alert("Xabar yuborildi! ✅");
-            document.getElementById("contactForm").reset();
-          } else {
-            alert("Xatolik yuz berdi ❌");
-          }
+      try {
+        const res = await fetch(API, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ chat_id: CHAT_ID, text: text })
+        });
+
+        const data = await res.json();
+        if (data.ok) {
+          alert("Xabar yuborildi! ✅");
+          document.getElementById("contactForm").reset();
+        } else {
+          alert("Telegram xatolik: " + data.description);
+        }
+      } catch (err) {
+        alert("Tarmoqqa ulanishda xatolik! ❌");
+      }
+    });
+  </script>
+</body>
+</html>
